@@ -4,8 +4,6 @@
   "description": "environment variable loading utility",
   "main": "dist/index.js",
   "scripts": {
-    "prepublish": "npm run build",
-    "build": "mkdir -p dist && async-to-gen -d lib/ dist/",
     "test": "ava",
     "coveralls": "nyc npm test && nyc report --report=text-lcov | coveralls"
   },
