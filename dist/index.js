@@ -27,15 +27,35 @@ function setenv (vars) {
 
 module.exports.setenv = setenv
 
-function config (file = '.env') {return __async(function*(){
-  
-  let path    = process.cwd() 
-  let config  = yield readFile(`${path}/${file}`)
-  let store   = parse(config)
-
-  setenv(store)
+function configFile (file = '.env') {return __async(function*(){
+  yield load(file, config => parse(config)) 
 }())}
 
-module.exports.config = config
+module.exports.config = configFile
+
+function configJSON (file = 'package.json', key = 'env') {return __async(function*(){
+  yield load(file, config => {
+    let store   = JSON.parse(config)
+
+    if (key) {
+      store = store[key]
+    }
+
+    return store
+  })
+}())}
+
+module.exports.configJSON = configJSON
+
+function load (file, fn) {return __async(function*(){
+
+  let path    = process.cwd() 
+  let config  = yield readFile(`${path}/${file}`)
+  let store   = fn(config)
+
+  setenv(store)
+}())} 
+
+module.exports.load = load
 
 function __async(g){return new Promise(function(s,j){function c(a,x){try{var r=g[x?"throw":"next"](a)}catch(e){return j(e)}return r.done?s(r.value):Promise.resolve(r.value).then(c,d)}function d(e){return c(e,1)}c()})}

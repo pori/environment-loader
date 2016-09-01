@@ -4,6 +4,7 @@
   "description": "environment variable loader",
   "main": "dist/index.js",
   "scripts": {
+    "build": "async-to-gen lib/index.js > dist/index.js",
     "test": "ava",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
