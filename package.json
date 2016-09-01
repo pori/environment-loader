@@ -1,0 +1,38 @@
+{
+  "name": "environment-loader",
+  "version": "0.1.0",
+  "description": "environment variable loading utility",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "mkdir -p dist && async-to-gen -d lib/ dist/",
+    "test": "ava",
+    "coveralls": "nyc npm test && nyc report --report=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pori/environment-loader.git"
+  },
+  "keywords": [
+    "env",
+    "environment",
+    "loader"
+  ],
+  "author": "A. Hernandez <porialex@gmail.com> (http://pori.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pori/environment-loader/issues"
+  },
+  "homepage": "https://github.com/pori/environment-loader#readme",
+  "devDependencies": {
+    "async-to-gen": "^1.0.5",
+    "ava": "^0.16.0",
+    "coveralls": "^2.11.12",
+    "nyc": "^8.1.0"
+  },
+  "ava": {
+    "require": [
+      "async-to-gen/register"
+    ]
+  }
+}
